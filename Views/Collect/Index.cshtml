@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Collect";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Collect</h2>
+
+<div>
+    <table>
+        <tbody>
+            <!-- ko foreach: collectionTypes -->
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: name"></td>
+            </tr>
+            <!-- /ko  -->
+            <tr>
+                <td>Type</td>
+                <td><select data-bind="options: collectionTypes, optionsValue: 'id', optionsText: 'name', optionsCaption: 'select...'"></select></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <table>
+        <tbody>
+            <!-- ko foreach: collections -->
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: name"></td>
+                <td data-bind="text: updated"></td>
+            </tr>
+            <!-- /ko  -->
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <table>
+        <tbody id="messages"></tbody>
+    </table>
+</div>
+
+@section scripts {
+
+    <script type="text/javascript">
+        var require = {
+            baseUrl: '/Scripts/views/collect',
+            paths: {
+                knockout: '/Scripts/lib/knockout-3.0.0',
+                komapping: '/Scripts/lib/knockout.mapping-latest.debug',
+                kovalidation: '/Scripts/lib/knockout.validation',
+                moment: '/Scripts/lib/moment'
+            },
+            shim: {
+                'kovalidation': {
+                    deps: ['knockout']
+                }
+            },
+            deps: ['komapping'],
+            callbacks: function (komapping) {
+
+            }
+        };
+    </script>
+    <script data-main='@Url.Content("~/Scripts/views/collect/app.js")' src='@Url.Content("~/Scripts/lib/require.js")'></script>
+
+}
